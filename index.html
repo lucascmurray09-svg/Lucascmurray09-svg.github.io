@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dorado Tutors</title>
+    <title>Dorado Tutors - Free Peer Tutoring</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -232,108 +232,138 @@
             color: #b0b0b0;
         }
 
-        /* Skills Section */
-        .skill {
-            margin-bottom: 1.5rem;
+        /* Role Cards */
+        .role-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
         }
 
-        .skill-name {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 0.5rem;
-            font-weight: bold;
-        }
-
-        .skill-bar {
-            width: 100%;
-            height: 10px;
-            background-color: #e0e0e0;
-            border-radius: 5px;
-            overflow: hidden;
-        }
-
-        body.dark-mode .skill-bar {
-            background-color: #444;
-        }
-
-        .skill-progress {
-            height: 100%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            transition: width 0.6s ease;
-        }
-
-        /* Projects Section */
-        .project {
+        .role-card {
             background: white;
+            padding: 2rem;
             border-radius: 8px;
-            overflow: hidden;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             transition: all 0.3s;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            align-items: center;
+            text-align: center;
+            border-top: 4px solid #3498db;
         }
 
-        body.dark-mode .project {
+        body.dark-mode .role-card {
             background-color: #2a2a2a;
         }
 
-        .project:nth-child(even) {
-            grid-template-columns: 1fr 1fr;
+        .role-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
         }
 
-        .project:nth-child(even) .project-content {
-            order: 2;
-        }
-
-        .project:nth-child(even) .project-image {
-            order: 1;
-        }
-
-        .project-image {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            height: 250px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 3rem;
-        }
-
-        .project-content {
-            padding: 2rem;
-        }
-
-        .project h3 {
+        .role-card h3 {
             font-size: 1.8rem;
-            margin-bottom: 1rem;
+            margin: 1rem 0;
             color: #2c3e50;
         }
 
-        body.dark-mode .project h3 {
+        body.dark-mode .role-card h3 {
             color: #3498db;
         }
 
-        .project-tags {
-            display: flex;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-            margin: 1rem 0;
+        .role-card .icon {
+            font-size: 3rem;
+            color: #667eea;
         }
 
-        .tag {
-            background-color: #e8f4f8;
+        .role-card ul {
+            text-align: left;
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+
+        .role-card li {
+            padding: 0.5rem 0;
+            color: #666;
+        }
+
+        body.dark-mode .role-card li {
+            color: #b0b0b0;
+        }
+
+        .role-card li::before {
+            content: "✓ ";
             color: #3498db;
-            padding: 0.25rem 0.75rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
             font-weight: bold;
+            margin-right: 0.5rem;
         }
 
-        body.dark-mode .tag {
-            background-color: #444;
-            color: #7dd3fc;
+        /* How It Works */
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .step {
+            text-align: center;
+        }
+
+        .step-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .step h3 {
+            margin: 1rem 0;
+            color: #2c3e50;
+        }
+
+        body.dark-mode .step h3 {
+            color: #3498db;
+        }
+
+        .step p {
+            color: #666;
+        }
+
+        body.dark-mode .step p {
+            color: #b0b0b0;
+        }
+
+        /* Impact Stats */
+        .impact-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .stat {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            opacity: 0.95;
         }
 
         /* Social Links */
@@ -432,22 +462,6 @@
                 font-size: 2rem;
             }
 
-            .project {
-                grid-template-columns: 1fr;
-            }
-
-            .project:nth-child(even) {
-                grid-template-columns: 1fr;
-            }
-
-            .project:nth-child(even) .project-content {
-                order: auto;
-            }
-
-            .project:nth-child(even) .project-image {
-                order: auto;
-            }
-
             main {
                 padding: 1rem;
             }
@@ -458,11 +472,11 @@
 
     <!-- Navigation -->
     <nav>
-        <div class="logo">LM</div>
+        <div class="logo">🎓 Dorado Tutors</div>
         <ul class="nav-links">
-            <li><a href="#about">About</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#projects">Projects</a></li>
+            <li><a href="#mission">Mission</a></li>
+            <li><a href="#roles">Get Involved</a></li>
+            <li><a href="#how">How It Works</a></li>
             <li><a href="#contact">Contact</a></li>
             <button class="theme-toggle" id="themeToggle" title="Toggle dark mode">
                 <i class="fas fa-moon"></i>
@@ -472,135 +486,137 @@
 
     <!-- Hero Section -->
     <section class="hero">
-        <h1>Hi, I'm Lucas Murray</h1>
-        <p>Our goal is to help kids in our area who need help with school meet up with other kids who have a passion for sharing their knowledge.</p>
+        <h1>Dorado Tutors</h1>
+        <p>Free peer-to-peer tutoring connecting students who need help with students who have a passion for sharing their knowledge.</p>
         <div class="cta-buttons">
-            <a href="#projects" class="btn btn-primary">View My Work</a>
-            <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+            <a href="#roles" class="btn btn-primary">Join as Tutor</a>
+            <a href="#roles" class="btn btn-secondary">Get Help</a>
         </div>
     </section>
 
     <!-- Main Content -->
     <main>
 
-        <!-- About Section -->
-        <section id="about">
-            <h2>About Us</h2>
+        <!-- Mission Section -->
+        <section id="mission">
+            <h2>Our Mission</h2>
             <div class="card-grid">
                 <div class="card">
-                    <div class="card-icon"><i class="fas fa-code"></i></div>
-                    <h3>Hand-Coded</h3>
-                    <p>I've graduated from template builders to writing real code. Every line is crafted with purpose and built from the ground up.</p>
+                    <div class="card-icon"><i class="fas fa-heart"></i></div>
+                    <h3>Community-Driven</h3>
+                    <p>We believe in the power of our community helping itself. Every tutor is a volunteer passionate about making a difference in their neighborhood.</p>
                 </div>
                 <div class="card">
-                    <div class="card-icon"><i class="fas fa-rocket"></i></div>
-                    <h3>Always Learning</h3>
-                    <p>The web development landscape is constantly evolving. I'm committed to staying current with the latest technologies and best practices.</p>
+                    <div class="card-icon"><i class="fas fa-free"></i></div>
+                    <h3>100% Free</h3>
+                    <p>Quality education should be accessible to everyone. Dorado Tutors is completely free—no hidden fees, no subscriptions, no barriers.</p>
                 </div>
                 <div class="card">
-                    <div class="card-icon"><i class="fas fa-star"></i></div>
-                    <h3>Quality First</h3>
-                    <p>I believe in creating websites that are not just beautiful, but also performant, accessible, and user-friendly.</p>
+                    <div class="card-icon"><i class="fas fa-lightbulb"></i></div>
+                    <h3>Peer Learning</h3>
+                    <p>Students learn from peers who understand their challenges. This builds confidence, strengthens friendships, and creates a supportive learning environment.</p>
                 </div>
             </div>
         </section>
 
-        <!-- Skills Section -->
-        <section id="skills">
-            <h2>Skills & Technologies</h2>
-            <div class="card">
-                <div class="skill">
-                    <div class="skill-name">
-                        <span>HTML & CSS</span>
-                        <span>90%</span>
-                    </div>
-                    <div class="skill-bar">
-                        <div class="skill-progress" style="width: 90%"></div>
-                    </div>
-                </div>
-
-                <div class="skill">
-                    <div class="skill-name">
-                        <span>JavaScript</span>
-                        <span>75%</span>
-                    </div>
-                    <div class="skill-bar">
-                        <div class="skill-progress" style="width: 75%"></div>
-                    </div>
-                </div>
-
-                <div class="skill">
-                    <div class="skill-name">
-                        <span>Responsive Design</span>
-                        <span>85%</span>
-                    </div>
-                    <div class="skill-bar">
-                        <div class="skill-progress" style="width: 85%"></div>
-                    </div>
-                </div>
-
-                <div class="skill">
-                    <div class="skill-name">
-                        <span>Web Performance</span>
-                        <span>80%</span>
-                    </div>
-                    <div class="skill-bar">
-                        <div class="skill-progress" style="width: 80%"></div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Projects Section -->
-        <section id="projects">
-            <h2>Featured Projects</h2>
+        <!-- Roles Section -->
+        <section id="roles">
+            <h2>Get Involved</h2>
+            <p style="text-align: center; margin-bottom: 2rem; font-size: 1.1rem;">
+                Whether you need help with school or want to share your knowledge, there's a role for you at Dorado Tutors.
+            </p>
             
-            <div class="project">
-                <div class="project-image">
-                    <i class="fas fa-globe"></i>
+            <div class="role-cards">
+                <div class="role-card">
+                    <div class="icon"><i class="fas fa-book"></i></div>
+                    <h3>Students Seeking Help</h3>
+                    <ul>
+                        <li>Get 1-on-1 tutoring support</li>
+                        <li>Learn at your own pace</li>
+                        <li>Connect with peer tutors</li>
+                        <li>Improve grades & confidence</li>
+                        <li>Build lasting friendships</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-primary">Request a Tutor</a>
                 </div>
-                <div class="project-content">
-                    <h3>Portfolio Website</h3>
-                    <p>A clean, modern portfolio showcasing web development skills with a focus on user experience and responsive design. Features smooth scrolling, dark mode toggle, and optimized performance.</p>
-                    <div class="project-tags">
-                        <span class="tag">HTML5</span>
-                        <span class="tag">CSS3</span>
-                        <span class="tag">JavaScript</span>
-                        <span class="tag">Responsive</span>
-                    </div>
-                    <a href="#" class="btn btn-primary">View Project</a>
+
+                <div class="role-card">
+                    <div class="icon"><i class="fas fa-graduation-cap"></i></div>
+                    <h3>Student Tutors</h3>
+                    <ul>
+                        <li>Share your knowledge</li>
+                        <li>Build leadership skills</li>
+                        <li>Help your community</li>
+                        <li>Reinforce your own learning</li>
+                        <li>Make a real impact</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-primary">Become a Tutor</a>
+                </div>
+
+                <div class="role-card">
+                    <div class="icon"><i class="fas fa-users"></i></div>
+                    <h3>Parents & Mentors</h3>
+                    <ul>
+                        <li>Support student growth</li>
+                        <li>Connect with volunteers</li>
+                        <li>Share resources & ideas</li>
+                        <li>Stay updated on progress</li>
+                        <li>Build community</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-primary">Get Involved</a>
                 </div>
             </div>
+        </section>
 
-            <div class="project">
-                <div class="project-image">
-                    <i class="fas fa-shopping-cart"></i>
+        <!-- How It Works Section -->
+        <section id="how">
+            <h2>How It Works</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Sign Up</h3>
+                    <p>Create your profile as a student needing help or a tutor ready to share knowledge.</p>
                 </div>
-                <div class="project-content">
-                    <h3>E-Commerce Site</h3>
-                    <p>An interactive e-commerce platform with product filtering, shopping cart functionality, and a sleek checkout experience. Built with modern web standards and best practices.</p>
-                    <div class="project-tags">
-                        <span class="tag">JavaScript</span>
-                        <span class="tag">API</span>
-                        <span class="tag">Dynamic</span>
-                    </div>
-                    <a href="#" class="btn btn-primary">View Project</a>
+
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Connect</h3>
+                    <p>Browse available tutors or find students who need help with subjects you're strong in.</p>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Meet Up</h3>
+                    <p>Schedule a session at a time and place that works for both of you in our community.</p>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Learn & Grow</h3>
+                    <p>Start tutoring sessions, build skills, and make a positive impact in your neighborhood.</p>
                 </div>
             </div>
+        </section>
 
-            <div class="project">
-                <div class="project-image">
-                    <i class="fas fa-tasks"></i>
+        <!-- Impact Section -->
+        <section id="impact">
+            <h2>Making a Difference</h2>
+            <div class="impact-stats">
+                <div class="stat">
+                    <div class="stat-number">100+</div>
+                    <div class="stat-label">Students Helped</div>
                 </div>
-                <div class="project-content">
-                    <h3>Task Management App</h3>
-                    <p>A productivity tool that helps users organize and track their tasks with intuitive UI. Features include task filtering, local storage, and a clean minimalist design.</p>
-                    <div class="project-tags">
-                        <span class="tag">JavaScript</span>
-                        <span class="tag">LocalStorage</span>
-                        <span class="tag">UI/UX</span>
-                    </div>
-                    <a href="#" class="btn btn-primary">View Project</a>
+                <div class="stat">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">Active Tutors</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">1000+</div>
+                    <div class="stat-label">Hours of Tutoring</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">$0</div>
+                    <div class="stat-label">Cost to Students</div>
                 </div>
             </div>
         </section>
@@ -609,30 +625,33 @@
         <section id="contact">
             <h2>Let's Connect</h2>
             <p style="text-align: center; margin-bottom: 2rem; font-size: 1.1rem;">
-                I'd love to hear from you! Reach out through any of these channels or send me an email.
+                Ready to join Dorado Tutors? Get in touch to sign up or learn more about our community tutoring program.
             </p>
             <div class="social-links">
                 <a href="https://github.com/lucascmurray09-svg" target="_blank" title="GitHub">
                     <i class="fab fa-github"></i>
                 </a>
-                <a href="https://linkedin.com" target="_blank" title="LinkedIn">
-                    <i class="fab fa-linkedin"></i>
-                </a>
-                <a href="https://twitter.com" target="_blank" title="Twitter">
-                    <i class="fab fa-twitter"></i>
-                </a>
-                <a href="mailto:your.email@example.com" title="Email">
+                <a href="mailto:info@doradotutors.com" title="Email">
                     <i class="fas fa-envelope"></i>
                 </a>
+                <a href="https://instagram.com" target="_blank" title="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="tel:+1234567890" title="Call">
+                    <i class="fas fa-phone"></i>
+                </a>
             </div>
+            <p style="text-align: center; margin-top: 2rem; color: #666;">
+                📧 Email: <strong>info@doradotutors.com</strong>
+            </p>
         </section>
 
     </main>
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2026 Lucas Murray. Built with code and creativity.</p>
-        <p>Always learning, always building.</p>
+        <p>&copy; 2026 Dorado Tutors. Building stronger communities through peer learning.</p>
+        <p>Free tutoring for every student who wants to learn.</p>
     </footer>
 
     <!-- JavaScript -->
@@ -671,7 +690,7 @@
             });
         });
 
-        // Animate skill bars on scroll
+        // Animate elements on scroll
         const observerOptions = {
             threshold: 0.5,
             rootMargin: '0px'
@@ -685,7 +704,7 @@
             });
         }, observerOptions);
 
-        document.querySelectorAll('.card, .project').forEach(el => {
+        document.querySelectorAll('.card, .role-card, .step, .stat').forEach(el => {
             observer.observe(el);
         });
     </script>
