@@ -1,713 +1,973 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dorado Tutors - Free Peer Tutoring</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background-color: #f8f9fa;
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        body.dark-mode {
-            background-color: #1a1a1a;
-            color: #e0e0e0;
-        }
-
-        /* Navigation */
-        nav {
-            background-color: #2c3e50;
-            padding: 1rem 2rem;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        body.dark-mode nav {
-            background-color: #0f0f0f;
-        }
-
-        nav .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #3498db;
-        }
-
-        nav .nav-links {
-            display: flex;
-            gap: 2rem;
-            align-items: center;
-            list-style: none;
-        }
-
-        nav a {
-            color: white;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        nav a:hover {
-            color: #3498db;
-        }
-
-        .theme-toggle {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.2rem;
-            cursor: pointer;
-            transition: color 0.3s;
-        }
-
-        .theme-toggle:hover {
-            color: #3498db;
-        }
-
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 6rem 2rem;
-            text-align: center;
-            min-height: 500px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            animation: slideInDown 0.8s ease-out;
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-            opacity: 0.95;
-            animation: slideInUp 0.8s ease-out 0.2s backwards;
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            animation: slideInUp 0.8s ease-out 0.4s backwards;
-        }
-
-        /* Buttons */
-        .btn {
-            display: inline-block;
-            padding: 0.75rem 2rem;
-            border-radius: 4px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: all 0.3s;
-            border: 2px solid transparent;
-            cursor: pointer;
-            font-size: 1rem;
-        }
-
-        .btn-primary {
-            background-color: #3498db;
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background-color: #2980b9;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
-        }
-
-        .btn-secondary {
-            background-color: transparent;
-            color: white;
-            border: 2px solid white;
-        }
-
-        .btn-secondary:hover {
-            background-color: white;
-            color: #667eea;
-            transform: translateY(-2px);
-        }
-
-        /* Main Content */
-        main {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-
-        /* Sections */
-        section {
-            margin-bottom: 4rem;
-        }
-
-        section h2 {
-            font-size: 2.5rem;
-            margin-bottom: 2rem;
-            text-align: center;
-            color: #2c3e50;
-            position: relative;
-            padding-bottom: 1rem;
-        }
-
-        body.dark-mode section h2 {
-            color: #3498db;
-        }
-
-        section h2::after {
-            content: '';
-            display: block;
-            width: 60px;
-            height: 4px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            margin: 1rem auto 0;
-        }
-
-        /* Card Grid */
-        .card-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .card {
-            background: white;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            transition: all 0.3s;
-        }
-
-        body.dark-mode .card {
-            background-color: #2a2a2a;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.5);
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
-        }
-
-        .card-icon {
-            font-size: 2.5rem;
-            color: #3498db;
-            margin-bottom: 1rem;
-        }
-
-        .card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: #2c3e50;
-        }
-
-        body.dark-mode .card h3 {
-            color: #3498db;
-        }
-
-        .card p {
-            color: #666;
-            line-height: 1.8;
-        }
-
-        body.dark-mode .card p {
-            color: #b0b0b0;
-        }
-
-        /* Role Cards */
-        .role-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .role-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            transition: all 0.3s;
-            text-align: center;
-            border-top: 4px solid #3498db;
-        }
-
-        body.dark-mode .role-card {
-            background-color: #2a2a2a;
-        }
-
-        .role-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
-        }
-
-        .role-card h3 {
-            font-size: 1.8rem;
-            margin: 1rem 0;
-            color: #2c3e50;
-        }
-
-        body.dark-mode .role-card h3 {
-            color: #3498db;
-        }
-
-        .role-card .icon {
-            font-size: 3rem;
-            color: #667eea;
-        }
-
-        .role-card ul {
-            text-align: left;
-            list-style: none;
-            margin: 1.5rem 0;
-        }
-
-        .role-card li {
-            padding: 0.5rem 0;
-            color: #666;
-        }
-
-        body.dark-mode .role-card li {
-            color: #b0b0b0;
-        }
-
-        .role-card li::before {
-            content: "✓ ";
-            color: #3498db;
-            font-weight: bold;
-            margin-right: 0.5rem;
-        }
-
-        /* How It Works */
-        .steps {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .step {
-            text-align: center;
-        }
-
-        .step-number {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border-radius: 50%;
-            font-size: 1.5rem;
-            font-weight: bold;
-            margin-bottom: 1rem;
-        }
-
-        .step h3 {
-            margin: 1rem 0;
-            color: #2c3e50;
-        }
-
-        body.dark-mode .step h3 {
-            color: #3498db;
-        }
-
-        .step p {
-            color: #666;
-        }
-
-        body.dark-mode .step p {
-            color: #b0b0b0;
-        }
-
-        /* Impact Stats */
-        .impact-stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .stat {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 2rem;
-            border-radius: 8px;
-            text-align: center;
-        }
-
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-label {
-            font-size: 1.1rem;
-            opacity: 0.95;
-        }
-
-        /* Social Links */
-        .social-links {
-            display: flex;
-            gap: 1.5rem;
-            justify-content: center;
-            margin: 2rem 0;
-        }
-
-        .social-links a {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background-color: #3498db;
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s;
-            text-decoration: none;
-            font-size: 1.3rem;
-        }
-
-        .social-links a:hover {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
-        }
-
-        /* Footer */
-        footer {
-            background-color: #2c3e50;
-            color: white;
-            text-align: center;
-            padding: 2rem;
-            margin-top: 4rem;
-        }
-
-        body.dark-mode footer {
-            background-color: #0f0f0f;
-        }
-
-        footer p {
-            margin: 0.5rem 0;
-        }
-
-        /* Animations */
-        @keyframes slideInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes slideInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            nav .nav-links {
-                gap: 1rem;
-                font-size: 0.9rem;
-            }
-
-            .hero h1 {
-                font-size: 2rem;
-            }
-
-            .hero p {
-                font-size: 1rem;
-            }
-
-            .cta-buttons {
-                flex-direction: column;
-            }
-
-            .btn {
-                width: 100%;
-                text-align: center;
-            }
-
-            section h2 {
-                font-size: 2rem;
-            }
-
-            main {
-                padding: 1rem;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Office Hours — Peer tutoring at your school</title>
+<meta name="description" content="Office Hours connects students with peer tutors at participating local high schools. Sign up by subject, verify with your school email, meet in the library.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Work+Sans:wght@400;500;600;700&family=Kalam:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#181826;
+    --paper:#FAF9F6;
+    --paper-2:#FFFFFF;
+    --navy:#23275B;
+    --navy-2:#2D316E;
+    --coral:#FF6B4A;
+    --gold:#F2B134;
+    --sky:#3E8FD0;
+    --mint:#3FAE83;
+    --plum:#8B5FBF;
+    --indigo:#4D5BCE;
+    --line: rgba(24,24,38,0.13);
+    --line-light: rgba(250,249,246,0.22);
+    --shadow: 0 20px 44px -20px rgba(20,20,40,0.32);
+    --r-sm:6px;
+    --r-md:10px;
+    --max:1180px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
+  }
+
+  body{
+    margin:0;
+    font-family:'Work Sans', sans-serif;
+    color:var(--ink);
+    background:var(--paper);
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size:26px 26px;
+    background-position:-1px -1px;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  /* dial the grid down so it's a texture, not a feature */
+  body{ background-blend-mode:normal; }
+  body::before{ content:none; }
+
+  h1,h2,h3,h4{
+    font-family:'Space Grotesk', sans-serif;
+    margin:0;
+    letter-spacing:-0.01em;
+  }
+  p{margin:0;}
+  a{color:inherit;}
+  img{max-width:100%;display:block;}
+  button{font-family:inherit;cursor:pointer;}
+
+  :focus-visible{
+    outline:3px solid var(--coral);
+    outline-offset:2px;
+    border-radius:3px;
+  }
+
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 28px;}
+
+  .eyebrow{
+    font-weight:700;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    font-size:0.72rem;
+    color:var(--coral);
+  }
+  .eyebrow.on-dark{color:var(--gold);}
+
+  .handwrite{
+    font-family:'Kalam', cursive;
+    font-weight:700;
+  }
+
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:13px 22px;
+    border-radius:var(--r-sm);
+    font-weight:700;
+    font-size:0.95rem;
+    border:2px solid transparent;
+    text-decoration:none;
+    transition:transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  }
+  .btn--primary{background:var(--coral);color:#fff;}
+  .btn--primary:hover{background:#e85b3d;transform:translateY(-2px);box-shadow:0 12px 22px -10px rgba(255,107,74,0.5);}
+  .btn--ghost-dark{border-color:var(--line-light);color:var(--paper);background:transparent;}
+  .btn--ghost-dark:hover{border-color:var(--paper);transform:translateY(-2px);}
+  .btn--ghost-light{border-color:var(--line);color:var(--ink);background:transparent;}
+  .btn--ghost-light:hover{border-color:var(--ink);transform:translateY(-2px);}
+  .btn--small{padding:9px 16px;font-size:0.84rem;}
+  .btn:disabled{opacity:0.45;cursor:not-allowed;transform:none;box-shadow:none;}
+
+  /* ---------- NAV ---------- */
+  header.nav{
+    position:sticky;top:0;z-index:50;
+    background:rgba(250,249,246,0.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:15px 28px;max-width:var(--max);margin:0 auto;
+  }
+  .wordmark{
+    display:flex;align-items:center;gap:8px;
+    font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.25rem;
+    text-decoration:none;color:var(--ink);
+  }
+  .wordmark svg{color:var(--coral);}
+  nav.links{display:flex;gap:26px;align-items:center;}
+  nav.links a{font-weight:600;font-size:0.9rem;text-decoration:none;color:var(--ink);opacity:0.78;position:relative;}
+  nav.links a:hover{opacity:1;}
+  nav.links a::after{
+    content:'';position:absolute;left:0;right:0;bottom:-6px;height:2px;background:var(--coral);
+    transform:scaleX(0);transition:transform 0.2s ease;
+  }
+  nav.links a:hover::after{transform:scaleX(1);}
+  .nav-cta{display:flex;align-items:center;gap:14px;}
+  .nav-toggle{display:none;background:none;border:none;flex-direction:column;gap:5px;padding:6px;}
+  .nav-toggle span{width:22px;height:2px;background:var(--ink);display:block;}
+
+  @media (max-width:860px){
+    nav.links{
+      position:absolute;top:100%;left:0;right:0;background:var(--paper);
+      flex-direction:column;align-items:flex-start;padding:18px 28px 24px;
+      border-bottom:1px solid var(--line);display:none;
+    }
+    nav.links.open{display:flex;}
+    .nav-toggle{display:flex;}
+    .nav-cta .btn--small{display:none;}
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{background:var(--navy);color:var(--paper);padding:70px 0 86px;position:relative;overflow:hidden;}
+  .hero::before{
+    content:'';position:absolute;inset:0;
+    background-image:radial-gradient(circle at 20% 25%, rgba(255,255,255,0.05) 0, transparent 45%),
+      radial-gradient(circle at 88% 75%, rgba(255,255,255,0.045) 0, transparent 40%);
+    pointer-events:none;
+  }
+  .hero-grid{display:grid;grid-template-columns:1.05fr 0.95fr;gap:54px;align-items:center;position:relative;z-index:1;}
+  .hero h1{font-size:clamp(2rem, 4vw, 3.1rem);line-height:1.1;font-weight:700;margin-top:14px;}
+  .hero h1 .hi{color:var(--gold);}
+  .hero p.lede{margin-top:20px;font-size:1.08rem;max-width:470px;color:rgba(250,249,246,0.84);}
+  .hero-ctas{display:flex;gap:14px;margin-top:30px;flex-wrap:wrap;}
+
+  /* ---- clipboard sign-up sheet ---- */
+  .clipboard{
+    background:var(--paper-2);color:var(--ink);
+    border-radius:8px;padding:30px 26px 22px;
+    box-shadow:var(--shadow);transform:rotate(-1.6deg);position:relative;
+  }
+  .clip-top{
+    position:absolute;top:-16px;left:50%;transform:translateX(-50%);
+    width:78px;height:26px;border-radius:6px;
+    background:linear-gradient(180deg,#cfd3da,#9aa0ab);
+    box-shadow:0 4px 8px rgba(0,0,0,0.25);
+  }
+  .clip-top::after{
+    content:'';position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+    width:46px;height:8px;border-radius:4px;background:rgba(0,0,0,0.18);
+  }
+  .clip-head{border-bottom:2px solid var(--ink);padding-bottom:10px;margin-bottom:6px;}
+  .clip-head h4{font-size:1.02rem;}
+  .clip-head span{font-size:0.78rem;color:var(--navy);font-weight:600;}
+  .clip-meta{display:flex;justify-content:space-between;padding:8px 0 12px;font-size:0.85rem;color:rgba(24,24,38,0.62);font-weight:600;}
+  .clip-row{
+    display:flex;align-items:center;justify-content:space-between;gap:10px;
+    padding:11px 0;border-bottom:1px dashed var(--line);font-size:0.9rem;
+  }
+  .clip-row .day{font-weight:700;min-width:128px;}
+  .clip-row .who{color:rgba(24,24,38,0.5);text-decoration:line-through;}
+  .clip-row.open{
+    background:rgba(255,107,74,0.08);
+    margin:0 -12px;padding:11px 12px;border-radius:6px;border-bottom:none;
+  }
+  .clip-row.open .day{color:var(--coral);}
+  .clip-row.open .who{
+    text-decoration:none;color:var(--coral);font-weight:700;
+    display:flex;align-items:center;gap:6px;
+  }
+  .cursor{display:inline-block;width:2px;height:14px;background:var(--coral);animation:blink 1s steps(1) infinite;}
+  @keyframes blink{50%{opacity:0;}}
+  .clip-note{margin-top:14px;font-family:'Kalam',cursive;font-weight:700;color:var(--coral);font-size:1.05rem;transform:rotate(-1deg);}
+
+  @media (max-width:900px){
+    .hero-grid{grid-template-columns:1fr;}
+    .clipboard{transform:rotate(0);max-width:440px;}
+  }
+
+  /* ---------- TRUST STRIP ---------- */
+  .trust{background:var(--paper-2);border-bottom:1px solid var(--line);padding:24px 0;}
+  .trust-row{display:flex;flex-wrap:wrap;gap:26px;justify-content:center;}
+  .trust-item{display:flex;align-items:center;gap:10px;font-weight:700;font-size:0.86rem;}
+  .trust-item svg{flex-shrink:0;color:var(--coral);}
+
+  /* ---------- SECTION COMMON ---------- */
+  section{padding:84px 0;}
+  .section-head{max-width:640px;margin-bottom:50px;}
+  .section-head h2{font-size:clamp(1.6rem, 2.6vw, 2.2rem);margin-top:10px;}
+  .section-head p{margin-top:13px;font-size:1.03rem;color:rgba(24,24,38,0.7);}
+  .reveal{opacity:0;transform:translateY(16px);transition:opacity 0.6s ease, transform 0.6s ease;}
+  .reveal.is-visible{opacity:1;transform:translateY(0);}
+
+  /* ---------- HOW IT WORKS ---------- */
+  .how-list{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;}
+  .how-item{background:var(--paper-2);border:1px solid var(--line);border-radius:var(--r-md);padding:26px 24px;}
+  .how-item .num{
+    font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:0.84rem;color:#fff;
+    background:var(--navy);width:28px;height:28px;border-radius:6px;
+    display:flex;align-items:center;justify-content:center;margin-bottom:16px;
+  }
+  .how-item h3{font-size:1.08rem;margin-bottom:9px;}
+  .how-item p{color:rgba(24,24,38,0.68);font-size:0.94rem;}
+  @media (max-width:860px){.how-list{grid-template-columns:1fr;}}
+
+  /* ---------- TUTORS ---------- */
+  .tutors{background:var(--paper-2);}
+  .filter-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:34px;}
+  .tag-chip{
+    border:1.5px solid transparent;border-radius:var(--r-sm);padding:8px 15px;
+    font-weight:700;font-size:0.82rem;background:var(--paper);color:var(--ink);
+    transition:all 0.15s ease;
+  }
+  .tag-chip:hover{border-color:var(--line);}
+  .tag-chip.active{color:#fff;}
+
+  .tutor-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+  @media (max-width:980px){.tutor-grid{grid-template-columns:repeat(2,1fr);}}
+  @media (max-width:680px){.tutor-grid{grid-template-columns:1fr;}}
+
+  .tutor-card{
+    border:1px solid var(--line);border-left:5px solid var(--ink);border-radius:var(--r-md);
+    padding:22px;background:var(--paper);display:flex;flex-direction:column;gap:12px;
+    transition:transform 0.18s ease, box-shadow 0.18s ease;
+  }
+  .tutor-card:hover{transform:translateY(-4px);box-shadow:0 16px 28px -16px rgba(20,20,40,0.25);}
+  .tutor-top{display:flex;gap:13px;align-items:center;}
+  .avatar{
+    width:50px;height:50px;border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;
+    color:#fff;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:0.95rem;flex-shrink:0;
+  }
+  .tutor-top h4{font-size:1.02rem;}
+  .tutor-top .subj{font-size:0.8rem;color:rgba(24,24,38,0.6);margin-top:2px;font-weight:600;}
+  .tutor-card .bio{font-size:0.9rem;color:rgba(24,24,38,0.76);flex-grow:1;}
+  .periods{display:flex;gap:6px;flex-wrap:wrap;}
+  .period-pill{
+    font-size:0.74rem;font-weight:700;padding:4px 9px;border-radius:99px;
+    background:rgba(24,24,38,0.06);color:rgba(24,24,38,0.65);
+  }
+  .tutor-card .note{font-family:'Kalam',cursive;font-weight:700;font-size:0.95rem;color:var(--coral);text-align:right;}
+  .tutor-meta{display:flex;justify-content:space-between;font-size:0.8rem;color:rgba(24,24,38,0.58);}
+  .tutor-meta .stars{color:var(--gold);font-weight:700;}
+  .tutor-card-actions{display:flex;gap:9px;margin-top:2px;}
+  .tutor-card-actions .btn{flex:1;justify-content:center;}
+
+  /* ---------- MODAL ---------- */
+  .modal-overlay{position:fixed;inset:0;background:rgba(20,20,40,0.55);display:none;align-items:center;justify-content:center;padding:24px;z-index:100;}
+  .modal-overlay.open{display:flex;}
+  .modal{background:var(--paper-2);border-radius:14px;max-width:540px;width:100%;max-height:88vh;overflow-y:auto;padding:30px;position:relative;}
+  .modal-close{position:absolute;top:16px;right:16px;background:var(--paper);border:1px solid var(--line);border-radius:var(--r-sm);width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;line-height:1;}
+  .modal-top{display:flex;gap:14px;align-items:center;margin-bottom:16px;}
+  .modal-top .avatar{width:58px;height:58px;font-size:1.1rem;border-radius:8px;}
+  .modal-top h3{font-size:1.25rem;}
+  .modal-top .subj{color:rgba(24,24,38,0.58);font-weight:600;font-size:0.9rem;margin-top:3px;}
+  .modal .bio-full{font-size:0.96rem;color:rgba(24,24,38,0.8);margin-bottom:14px;}
+  .modal .periods{margin-bottom:16px;}
+  .modal-stats{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:18px;padding:13px 15px;background:var(--paper);border-radius:8px;}
+  .modal-stats div{font-size:0.78rem;color:rgba(24,24,38,0.5);font-weight:700;text-transform:uppercase;letter-spacing:0.03em;}
+  .modal-stats div b{display:block;font-family:'Space Grotesk',sans-serif;color:var(--ink);font-size:0.98rem;text-transform:none;letter-spacing:0;margin-top:2px;}
+  .modal .note{font-family:'Kalam',cursive;font-weight:700;color:var(--coral);font-size:1.02rem;display:block;margin-bottom:16px;text-align:left;}
+
+  /* ---------- SAFETY ---------- */
+  .safety{background:var(--navy);color:var(--paper);}
+  .safety .section-head p{color:rgba(250,249,246,0.78);}
+  .safety-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px 36px;}
+  .safety-item{display:flex;gap:14px;padding:17px 0;border-bottom:1px solid var(--line-light);}
+  .safety-item svg{flex-shrink:0;margin-top:3px;color:var(--gold);}
+  .safety-item h4{font-size:0.98rem;margin-bottom:6px;}
+  .safety-item p{font-size:0.9rem;color:rgba(250,249,246,0.72);}
+  @media (max-width:780px){.safety-grid{grid-template-columns:1fr;}}
+
+  /* ---------- SIGNUP ---------- */
+  .signup-shell{background:var(--paper-2);border:1px solid var(--line);border-radius:16px;padding:42px;max-width:660px;margin:0 auto;box-shadow:var(--shadow);}
+  .progress{display:flex;gap:8px;margin-bottom:28px;}
+  .progress .seg{flex:1;height:5px;border-radius:99px;background:var(--line);overflow:hidden;}
+  .progress .seg.done{background:var(--coral);}
+  .step-label{font-size:0.78rem;font-weight:700;color:var(--coral);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px;}
+  .step h3{font-size:1.35rem;margin-bottom:22px;}
+  .step{display:none;}
+  .step.active{display:block;}
+  .field{margin-bottom:17px;}
+  .field label{display:block;font-weight:700;font-size:0.86rem;margin-bottom:7px;}
+  .field input, .field select{
+    width:100%;padding:11px 13px;border:1.5px solid var(--line);border-radius:var(--r-sm);
+    font-family:'Work Sans',sans-serif;font-size:0.94rem;background:var(--paper);color:var(--ink);
+  }
+  .field input:focus, .field select:focus{border-color:var(--coral);outline:none;}
+  .field-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  .checks{display:flex;flex-wrap:wrap;gap:9px;}
+  .check-pill{border:1.5px solid var(--line);border-radius:var(--r-sm);padding:9px 15px;font-size:0.85rem;font-weight:600;cursor:pointer;user-select:none;}
+  .check-pill input{display:none;}
+  .check-pill.checked{background:var(--navy);color:var(--paper);border-color:var(--navy);}
+  .permission{
+    display:flex;gap:10px;align-items:flex-start;padding:14px;background:rgba(255,107,74,0.07);
+    border:1.5px solid rgba(255,107,74,0.25);border-radius:var(--r-sm);margin-top:6px;
+  }
+  .permission input{margin-top:3px;}
+  .permission label{font-size:0.85rem;font-weight:500;}
+  .step-actions{display:flex;justify-content:space-between;margin-top:26px;}
+  .confirm-box{text-align:center;padding:8px 0 4px;}
+  .confirm-box .check-icon{width:54px;height:54px;border-radius:var(--r-md);background:var(--navy);color:var(--paper);display:flex;align-items:center;justify-content:center;margin:0 auto 18px;}
+  .confirm-box h3{margin-bottom:10px;}
+  .confirm-box p{color:rgba(24,24,38,0.68);max-width:420px;margin:0 auto;}
+  .helper{font-size:0.81rem;color:rgba(24,24,38,0.52);margin-top:-9px;margin-bottom:16px;}
+
+  /* ---------- TESTIMONIALS ---------- */
+  .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+  @media (max-width:900px){.testi-grid{grid-template-columns:1fr;}}
+  .testi-card{background:#FFFDF5;border:1px solid var(--line);border-radius:6px;padding:22px;position:relative;box-shadow:0 10px 20px -14px rgba(20,20,40,0.25);}
+  .testi-card::before{content:'';position:absolute;top:-8px;left:50%;transform:translateX(-50%) rotate(-3deg);width:50px;height:16px;background:rgba(242,177,52,0.55);}
+  .testi-card p.quote{font-size:0.99rem;margin-bottom:14px;}
+  .testi-card .by{font-family:'Kalam',cursive;font-weight:700;font-size:0.95rem;color:var(--navy);}
+
+  /* ---------- FAQ ---------- */
+  .faq-list{max-width:760px;}
+  .faq-item{border-bottom:1px solid var(--line);}
+  .faq-q{width:100%;text-align:left;background:none;border:none;padding:19px 0;display:flex;justify-content:space-between;align-items:center;font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:1rem;}
+  .faq-q .plus{font-size:1.35rem;transition:transform 0.2s ease;color:var(--coral);}
+  .faq-item.open .faq-q .plus{transform:rotate(45deg);}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height 0.25s ease;}
+  .faq-a p{padding-bottom:19px;color:rgba(24,24,38,0.7);font-size:0.94rem;max-width:620px;}
+
+  /* ---------- APPLY BAND ---------- */
+  .apply-band{background:var(--paper-2);border:1px solid var(--line);border-radius:16px;padding:42px;display:flex;justify-content:space-between;align-items:center;gap:28px;}
+  .apply-band h3{font-size:1.35rem;margin-bottom:10px;}
+  .apply-band p{color:rgba(24,24,38,0.68);max-width:430px;}
+  @media (max-width:760px){.apply-band{flex-direction:column;text-align:center;}.apply-band p{margin:0 auto;}}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--navy);color:var(--paper);padding:56px 0 28px;}
+  .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:34px;padding-bottom:34px;border-bottom:1px solid var(--line-light);}
+  .footer-grid h5{font-size:0.78rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--gold);margin-bottom:13px;}
+  .footer-grid ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:9px;}
+  .footer-grid a{font-size:0.9rem;color:rgba(250,249,246,0.82);text-decoration:none;}
+  .footer-grid a:hover{color:var(--paper);}
+  .footer-grid p{color:rgba(250,249,246,0.68);font-size:0.9rem;max-width:280px;}
+  .footer-bottom{display:flex;justify-content:space-between;padding-top:22px;font-size:0.8rem;color:rgba(250,249,246,0.5);flex-wrap:wrap;gap:10px;}
+  @media (max-width:760px){.footer-grid{grid-template-columns:1fr 1fr;}}
+</style>
 </head>
 <body>
 
-    <!-- Navigation -->
-    <nav>
-        <div class="logo">🎓 Dorado Tutors</div>
-        <ul class="nav-links">
-            <li><a href="#mission">Mission</a></li>
-            <li><a href="#roles">Get Involved</a></li>
-            <li><a href="#how">How It Works</a></li>
-            <li><a href="#contact">Contact</a></li>
-            <button class="theme-toggle" id="themeToggle" title="Toggle dark mode">
-                <i class="fas fa-moon"></i>
-            </button>
-        </ul>
+<header class="nav">
+  <div class="nav-inner">
+    <a href="#top" class="wordmark">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+      Office Hours
+    </a>
+    <nav class="links" id="navLinks">
+      <a href="#how-it-works">How it works</a>
+      <a href="#tutors">Tutors</a>
+      <a href="#safety">Safety</a>
+      <a href="#faq">FAQ</a>
     </nav>
+    <div class="nav-cta">
+      <a href="#signup" class="btn btn--primary btn--small">Sign up</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <h1>Dorado Tutors</h1>
-        <p>Free peer-to-peer tutoring connecting students who need help with students who have a passion for sharing their knowledge.</p>
-        <div class="cta-buttons">
-            <a href="#roles" class="btn btn-primary">Join as Tutor</a>
-            <a href="#roles" class="btn btn-secondary">Get Help</a>
+<section class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="eyebrow on-dark">Peer tutoring, same school, same homework</p>
+      <h1>Find a tutor <span class="hi">down the hall.</span></h1>
+      <p class="lede">Office Hours connects students with peer tutors at participating local high schools. Same classes, same teachers, same homework. Sessions happen in the library — supervised, and always free.</p>
+      <div class="hero-ctas">
+        <a href="#tutors" class="btn btn--primary">Browse tutors</a>
+        <a href="#how-it-works" class="btn btn--ghost-dark">How it works</a>
+      </div>
+    </div>
+
+    <div class="clipboard">
+      <div class="clip-top"></div>
+      <div class="clip-head">
+        <h4>Room 214 — Tutoring Sign-Up</h4>
+        <span>Subject: AP Chemistry · Tutor: Sam K., Senior</span>
+      </div>
+      <div class="clip-row"><span class="day">Tue · 3:15–4:00</span><span class="who">Maria L.</span></div>
+      <div class="clip-row"><span class="day">Wed · 3:15–4:00</span><span class="who">Devon R.</span></div>
+      <div class="clip-row open"><span class="day">Thu · 3:15–4:00</span><span class="who">Sign here <span class="cursor"></span></span></div>
+      <p class="clip-note">still has a spot open this week →</p>
+    </div>
+  </div>
+</section>
+
+<div class="trust">
+  <div class="wrap trust-row">
+    <div class="trust-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>School email required</div>
+    <div class="trust-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>Sessions in the library</div>
+    <div class="trust-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 3l7 3v6c0 5-3.5 8-7 9-3.5-1-7-4-7-9V6l7-3z"/></svg>Staff advisor on site</div>
+    <div class="trust-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg>Always free</div>
+  </div>
+</div>
+
+<section id="how-it-works">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">How it works</p>
+      <h2>Three steps. No cold-emailing strangers.</h2>
+      <p>It's a sign-up sheet, just online and a little less crumpled.</p>
+    </div>
+    <div class="how-list">
+      <div class="how-item reveal">
+        <div class="num">1</div>
+        <h3>Pick a subject & a tutor</h3>
+        <p>Browse by class, see who's free during which period, and what they're actually good at explaining.</p>
+      </div>
+      <div class="how-item reveal">
+        <div class="num">2</div>
+        <h3>Verify with your school email</h3>
+        <p>Keeps Office Hours limited to students at participating schools in your area — no outside accounts.</p>
+      </div>
+      <div class="how-item reveal">
+        <div class="num">3</div>
+        <h3>Meet in the library</h3>
+        <p>Every session happens during posted library hours, with a staff member on site. No exceptions, no off-site meetups.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="tutors" id="tutors">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">Open for sign-ups</p>
+      <h2>Tutors who already survived this class.</h2>
+      <p>Every tutor here verified with a school email and has a staff advisor signed off on their hours.</p>
+    </div>
+
+    <div class="filter-row" id="filterRow">
+      <button class="tag-chip active" data-filter="all" style="background:var(--ink);color:#fff;">All subjects</button>
+      <button class="tag-chip" data-filter="math" style="--c:var(--sky)">Math</button>
+      <button class="tag-chip" data-filter="science" style="--c:var(--mint)">Science</button>
+      <button class="tag-chip" data-filter="english" style="--c:var(--coral)">English</button>
+      <button class="tag-chip" data-filter="history" style="--c:var(--gold)">History</button>
+      <button class="tag-chip" data-filter="language" style="--c:var(--plum)">Language</button>
+      <button class="tag-chip" data-filter="cs" style="--c:var(--indigo)">Computer Science</button>
+    </div>
+
+    <div class="tutor-grid reveal" id="tutorGrid"></div>
+  </div>
+</section>
+
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal" id="modalContent" role="dialog" aria-modal="true"></div>
+</div>
+
+<section class="safety" id="safety">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow on-dark">Read this part</p>
+      <h2>How this stays safe for everyone.</h2>
+      <p>Built with the same rules a school's own peer-tutoring club would run on.</p>
+    </div>
+    <div class="safety-grid">
+      <div class="safety-item reveal">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+        <div><h4>Verified students only</h4><p>Every account — tutor or student — is verified with a school email and linked to a staff advisor.</p></div>
+      </div>
+      <div class="safety-item reveal">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+        <div><h4>Public, supervised locations only</h4><p>Sessions happen in the school library or a public library study room during posted open hours. Never off-site, never behind a closed door.</p></div>
+      </div>
+      <div class="safety-item reveal">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l7 3v6c0 5-3.5 8-7 9-3.5-1-7-4-7-9V6l7-3z"/></svg>
+        <div><h4>Parent permission on file</h4><p>A parent or guardian signs a one-time permission form before a student can book or tutor a session.</p></div>
+      </div>
+      <div class="safety-item reveal">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><path d="M12 9v4M12 17h.01"/></svg>
+        <div><h4>Easy to report</h4><p>See something off? Report it in two taps from any profile. A staff advisor reviews every report within a day.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="signup" id="signup">
+  <div class="wrap">
+    <div class="section-head reveal" style="margin:0 auto 42px;text-align:center;">
+      <p class="eyebrow">Get started</p>
+      <h2>Sign up in about three minutes.</h2>
+      <p style="margin-left:auto;margin-right:auto;">You'll get an email at your school address to confirm before anything's booked.</p>
+    </div>
+
+    <div class="signup-shell reveal">
+      <div class="progress">
+        <div class="seg done" data-seg="1"></div>
+        <div class="seg" data-seg="2"></div>
+        <div class="seg" data-seg="3"></div>
+        <div class="seg" data-seg="4"></div>
+      </div>
+
+      <form id="signupForm">
+        <div class="step active" data-step="1">
+          <p class="step-label">Step 1 of 3</p>
+          <h3>Your info</h3>
+          <div class="field">
+            <label for="studentName">Your name</label>
+            <input type="text" id="studentName" required placeholder="e.g. Riley Chen">
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="studentEmail">School email</label>
+              <input type="email" id="studentEmail" required placeholder="you@yourschool.edu">
+            </div>
+            <div class="field">
+              <label for="studentGrade">Grade</label>
+              <select id="studentGrade" required>
+                <option value="">Select grade</option>
+                <option>Freshman</option><option>Sophomore</option><option>Junior</option><option>Senior</option>
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <label for="schoolName">Your school</label>
+            <input type="text" id="schoolName" required placeholder="e.g. Lincoln High School">
+          </div>
+          <p class="helper">A school email keeps Office Hours limited to students at participating schools — we'll never email anywhere else.</p>
+          <div class="step-actions">
+            <span></span>
+            <button type="button" class="btn btn--primary" data-next="2">Continue</button>
+          </div>
         </div>
-    </section>
 
-    <!-- Main Content -->
-    <main>
-
-        <!-- Mission Section -->
-        <section id="mission">
-            <h2>Our Mission</h2>
-            <div class="card-grid">
-                <div class="card">
-                    <div class="card-icon"><i class="fas fa-heart"></i></div>
-                    <h3>Community-Driven</h3>
-                    <p>We believe in the power of our community helping itself. Every tutor is a volunteer passionate about making a difference in their neighborhood.</p>
-                </div>
-                <div class="card">
-                    <div class="card-icon"><i class="fas fa-free"></i></div>
-                    <h3>100% Free</h3>
-                    <p>Quality education should be accessible to everyone. Dorado Tutors is completely free—no hidden fees, no subscriptions, no barriers.</p>
-                </div>
-                <div class="card">
-                    <div class="card-icon"><i class="fas fa-lightbulb"></i></div>
-                    <h3>Peer Learning</h3>
-                    <p>Students learn from peers who understand their challenges. This builds confidence, strengthens friendships, and creates a supportive learning environment.</p>
-                </div>
+        <div class="step" data-step="2">
+          <p class="step-label">Step 2 of 3</p>
+          <h3>What do you need help with?</h3>
+          <div class="field">
+            <label>Subjects</label>
+            <div class="checks" id="subjectChecks">
+              <label class="check-pill"><input type="checkbox" value="Math">Math</label>
+              <label class="check-pill"><input type="checkbox" value="Science">Science</label>
+              <label class="check-pill"><input type="checkbox" value="English">English</label>
+              <label class="check-pill"><input type="checkbox" value="History">History</label>
+              <label class="check-pill"><input type="checkbox" value="Language">Language</label>
+              <label class="check-pill"><input type="checkbox" value="Computer Science">Computer Science</label>
             </div>
-        </section>
+          </div>
+          <div class="field">
+            <label for="tutorPref">Tutor preference (optional)</label>
+            <select id="tutorPref">
+              <option value="">No preference — match me</option>
+            </select>
+          </div>
+          <div class="step-actions">
+            <button type="button" class="btn btn--ghost-light" data-back="1">Back</button>
+            <button type="button" class="btn btn--primary" data-next="3">Continue</button>
+          </div>
+        </div>
 
-        <!-- Roles Section -->
-        <section id="roles">
-            <h2>Get Involved</h2>
-            <p style="text-align: center; margin-bottom: 2rem; font-size: 1.1rem;">
-                Whether you need help with school or want to share your knowledge, there's a role for you at Dorado Tutors.
-            </p>
-            
-            <div class="role-cards">
-                <div class="role-card">
-                    <div class="icon"><i class="fas fa-book"></i></div>
-                    <h3>Students Seeking Help</h3>
-                    <ul>
-                        <li>Get 1-on-1 tutoring support</li>
-                        <li>Learn at your own pace</li>
-                        <li>Connect with peer tutors</li>
-                        <li>Improve grades & confidence</li>
-                        <li>Build lasting friendships</li>
-                    </ul>
-                    <a href="#contact" class="btn btn-primary">Request a Tutor</a>
-                </div>
-
-                <div class="role-card">
-                    <div class="icon"><i class="fas fa-graduation-cap"></i></div>
-                    <h3>Student Tutors</h3>
-                    <ul>
-                        <li>Share your knowledge</li>
-                        <li>Build leadership skills</li>
-                        <li>Help your community</li>
-                        <li>Reinforce your own learning</li>
-                        <li>Make a real impact</li>
-                    </ul>
-                    <a href="#contact" class="btn btn-primary">Become a Tutor</a>
-                </div>
-
-                <div class="role-card">
-                    <div class="icon"><i class="fas fa-users"></i></div>
-                    <h3>Parents & Mentors</h3>
-                    <ul>
-                        <li>Support student growth</li>
-                        <li>Connect with volunteers</li>
-                        <li>Share resources & ideas</li>
-                        <li>Stay updated on progress</li>
-                        <li>Build community</li>
-                    </ul>
-                    <a href="#contact" class="btn btn-primary">Get Involved</a>
-                </div>
+        <div class="step" data-step="3">
+          <p class="step-label">Step 3 of 3</p>
+          <h3>When works?</h3>
+          <div class="field">
+            <label>Preferred period</label>
+            <div class="checks" id="periodChecks">
+              <label class="check-pill"><input type="checkbox" value="Before school">Before school</label>
+              <label class="check-pill"><input type="checkbox" value="Lunch">Lunch</label>
+              <label class="check-pill"><input type="checkbox" value="7th period">7th period</label>
+              <label class="check-pill"><input type="checkbox" value="After school">After school</label>
             </div>
-        </section>
+          </div>
+          <div class="permission">
+            <input type="checkbox" id="permissionCheck" required>
+            <label for="permissionCheck">My parent or guardian has signed the program's permission form (one-time, on file with the school).</label>
+          </div>
+          <p class="helper">Don't have one yet? Your school's front office keeps a copy — ask before your first session.</p>
+          <div class="step-actions">
+            <button type="button" class="btn btn--ghost-light" data-back="2">Back</button>
+            <button type="submit" class="btn btn--primary">Sign up</button>
+          </div>
+        </div>
 
-        <!-- How It Works Section -->
-        <section id="how">
-            <h2>How It Works</h2>
-            <div class="steps">
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <h3>Sign Up</h3>
-                    <p>Create your profile as a student needing help or a tutor ready to share knowledge.</p>
-                </div>
-
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <h3>Connect</h3>
-                    <p>Browse available tutors or find students who need help with subjects you're strong in.</p>
-                </div>
-
-                <div class="step">
-                    <div class="step-number">3</div>
-                    <h3>Meet Up</h3>
-                    <p>Schedule a session at a time and place that works for both of you in our community.</p>
-                </div>
-
-                <div class="step">
-                    <div class="step-number">4</div>
-                    <h3>Learn & Grow</h3>
-                    <p>Start tutoring sessions, build skills, and make a positive impact in your neighborhood.</p>
-                </div>
+        <div class="step" data-step="4">
+          <div class="confirm-box">
+            <div class="check-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg>
             </div>
-        </section>
+            <h3 id="confirmName">You're on the list.</h3>
+            <p>Check your school email within one business day for a couple of time options that work with your tutor's open library slots. Nothing's confirmed until you pick one.</p>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
 
-        <!-- Impact Section -->
-        <section id="impact">
-            <h2>Making a Difference</h2>
-            <div class="impact-stats">
-                <div class="stat">
-                    <div class="stat-number">100+</div>
-                    <div class="stat-label">Students Helped</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-number">50+</div>
-                    <div class="stat-label">Active Tutors</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-number">1000+</div>
-                    <div class="stat-label">Hours of Tutoring</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-number">$0</div>
-                    <div class="stat-label">Cost to Students</div>
-                </div>
-            </div>
-        </section>
+<section class="testimonials">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">From other students</p>
+      <h2>No one made them say this.</h2>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card reveal">
+        <p class="quote">"Maria explained log properties in like ten minutes. My math teacher took a week."</p>
+        <p class="by">— Freshman, tutored by Maria</p>
+      </div>
+      <div class="testi-card reveal">
+        <p class="quote">"Devon read my essay and didn't just say 'good job,' which was honestly new for me."</p>
+        <p class="by">— Sophomore, tutored by Devon</p>
+      </div>
+      <div class="testi-card reveal">
+        <p class="quote">"Jordan made me actually understand loops instead of just copying his code and nodding."</p>
+        <p class="by">— Sophomore, tutored by Jordan</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-        <!-- Contact Section -->
-        <section id="contact">
-            <h2>Let's Connect</h2>
-            <p style="text-align: center; margin-bottom: 2rem; font-size: 1.1rem;">
-                Ready to join Dorado Tutors? Get in touch to sign up or learn more about our community tutoring program.
-            </p>
-            <div class="social-links">
-                <a href="https://github.com/lucascmurray09-svg" target="_blank" title="GitHub">
-                    <i class="fab fa-github"></i>
-                </a>
-                <a href="mailto:info@doradotutors.com" title="Email">
-                    <i class="fas fa-envelope"></i>
-                </a>
-                <a href="https://instagram.com" target="_blank" title="Instagram">
-                    <i class="fab fa-instagram"></i>
-                </a>
-                <a href="tel:+1234567890" title="Call">
-                    <i class="fas fa-phone"></i>
-                </a>
-            </div>
-            <p style="text-align: center; margin-top: 2rem; color: #666;">
-                📧 Email: <strong>info@doradotutors.com</strong>
-            </p>
-        </section>
+<section id="faq">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">Questions</p>
+      <h2>Things people ask before signing up.</h2>
+    </div>
+    <div class="faq-list reveal" id="faqList">
+      <div class="faq-item">
+        <button class="faq-q">Do I have to go to the same school as my tutor?<span class="plus">+</span></button>
+        <div class="faq-a"><p>Mostly. Office Hours connects students within participating schools in your area, so you'll usually overlap on teachers and even classes.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Is this actually free?<span class="plus">+</span></button>
+        <div class="faq-a"><p>Yes, always. Tutors volunteer for service hours or honor society credit, not pay — there's no fee at any step.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Where do sessions happen?<span class="plus">+</span></button>
+        <div class="faq-a"><p>The school library during posted open-library hours, or a public library study room. Sessions never happen off-site.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">What if my tutor doesn't show up?<span class="plus">+</span></button>
+        <div class="faq-a"><p>Report it from your confirmation email and we'll find you a replacement slot within a day.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Can I sign up to tutor and get tutored?<span class="plus">+</span></button>
+        <div class="faq-a"><p>Yes — plenty of students do both, usually in different subjects.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
 
-    </main>
+<section>
+  <div class="wrap">
+    <div class="apply-band reveal">
+      <div>
+        <p class="eyebrow">For tutors</p>
+        <h3>Got a strong grade in something? We need you.</h3>
+        <p>Set your own available periods. Earn service hours or honor society credit, and actually help someone get it.</p>
+      </div>
+      <a href="#" class="btn btn--ghost-light">Become a tutor</a>
+    </div>
+  </div>
+</section>
 
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2026 Dorado Tutors. Building stronger communities through peer learning.</p>
-        <p>Free tutoring for every student who wants to learn.</p>
-    </footer>
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <a href="#top" class="wordmark" style="color:var(--paper);">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+          Office Hours
+        </a>
+        <p style="margin-top:14px;">Peer tutoring for high school students at participating local schools. Always free, always in the library.</p>
+      </div>
+      <div>
+        <h5>Company</h5>
+        <ul>
+          <li><a href="#how-it-works">How it works</a></li>
+          <li><a href="#safety">Safety</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>For students</h5>
+        <ul>
+          <li><a href="#tutors">Browse tutors</a></li>
+          <li><a href="#signup">Sign up</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>For tutors</h5>
+        <ul>
+          <li><a href="#">Apply</a></li>
+          <li><a href="#">Requirements</a></li>
+          <li><a href="#">Hours & credit</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Office Hours</span>
+      <span>Privacy · Terms · Trust & Safety</span>
+    </div>
+  </div>
+</footer>
 
-    <!-- JavaScript -->
-    <script>
-        // Dark Mode Toggle
-        const themeToggle = document.getElementById('themeToggle');
-        const htmlElement = document.documentElement;
+<script>
+(function(){
+  // ---- Nav toggle ----
+  var navToggle = document.getElementById('navToggle');
+  var navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', function(){
+    var open = navLinks.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', open);
+  });
+  navLinks.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){ navLinks.classList.remove('open'); });
+  });
 
-        // Check for saved theme preference or default to light mode
-        const currentTheme = localStorage.getItem('theme') || 'light';
-        if (currentTheme === 'dark') {
-            document.body.classList.add('dark-mode');
-            themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+  // ---- Subject accent colors (kept in JS so chips + cards + tags stay in sync) ----
+  var ACCENTS = {
+    math:'var(--sky)', science:'var(--mint)', english:'var(--coral)',
+    history:'var(--gold)', language:'var(--plum)', cs:'var(--indigo)'
+  };
+
+  // style filter chips with their accent color
+  document.querySelectorAll('.tag-chip[data-filter]').forEach(function(chip){
+    var f = chip.dataset.filter;
+    if(f === 'all') return;
+    chip.style.borderColor = ACCENTS[f];
+    chip.addEventListener('mouseenter', function(){});
+  });
+
+  // ---- Tutor data ----
+  var TUTORS = [
+    { id:'sam', name:'Sam K.', grade:'Senior', initials:'SK', filter:'science',
+      subjectLabel:'AP Chemistry, Biology',
+      periods:['Lunch','After school'],
+      bio:"Sam keeps a running list of chemistry mnemonics and will absolutely draw you a diagram of a cell, unprompted.",
+      note:'4.0 in Chem, ask literally anyone', stat1:'4.0 GPA in Chem', stat2:'85+ sessions', rating:'4.9' },
+    { id:'maria', name:'Maria L.', grade:'Junior', initials:'ML', filter:'math',
+      subjectLabel:'Algebra II, Pre-Calc',
+      periods:['7th period','After school'],
+      bio:"Maria explains it the way she wishes someone had explained it to her freshman year — no shortcuts, no shame about asking twice.",
+      note:'Mu Alpha Theta captain', stat1:'Math Team captain', stat2:'120+ sessions', rating:'5.0' },
+    { id:'devon', name:'Devon R.', grade:'Senior', initials:'DR', filter:'english',
+      subjectLabel:'English & Essay Help',
+      periods:['Lunch','7th period'],
+      bio:"Devon edits the lit magazine and will not let a five-paragraph essay leave the room with a weak thesis.",
+      note:'will fight you over a comma splice', stat1:'Lit mag editor', stat2:'95+ sessions', rating:'4.8' },
+    { id:'priya', name:'Priya B.', grade:'Junior', initials:'PB', filter:'language',
+      subjectLabel:'Spanish I & II',
+      periods:['Before school','Lunch'],
+      bio:"Priya grew up speaking Spanish at home and tutors it like it's no big deal — because to her, it isn't.",
+      note:'Spanish Honor Society', stat1:'Native speaker', stat2:'60+ sessions', rating:'4.9' },
+    { id:'jordan', name:'Jordan T.', grade:'Sophomore', initials:'JT', filter:'cs',
+      subjectLabel:'Intro CS & AP CS A',
+      periods:['After school'],
+      bio:"Jordan built a Discord bot before he made his bed, probably. Patient with anyone who's never written a line of code.",
+      note:'started coding in 7th grade', stat1:'Coding since age 12', stat2:'40+ sessions', rating:'4.8' },
+    { id:'ava', name:'Ava N.', grade:'Senior', initials:'AN', filter:'history',
+      subjectLabel:'US History & AP World',
+      periods:['Lunch','After school'],
+      bio:"Ava turns timelines into stories you actually remember — ask her about any war and she'll have a way in.",
+      note:'NHS president', stat1:'NHS president', stat2:'70+ sessions', rating:'4.9' }
+  ];
+
+  var grid = document.getElementById('tutorGrid');
+  var tutorPrefSelect = document.getElementById('tutorPref');
+
+  function periodPills(periods){
+    return periods.map(function(p){ return '<span class="period-pill">' + p + '</span>'; }).join('');
+  }
+
+  function renderTutors(filter){
+    grid.innerHTML = '';
+    TUTORS.filter(function(t){ return filter === 'all' || t.filter === filter; })
+      .forEach(function(t){
+        var accent = ACCENTS[t.filter];
+        var card = document.createElement('div');
+        card.className = 'tutor-card';
+        card.style.borderLeftColor = accent;
+        card.innerHTML =
+          '<div class="tutor-top">' +
+            '<div class="avatar" style="background:' + accent + '">' + t.initials + '</div>' +
+            '<div><h4>' + t.name + '</h4><p class="subj">' + t.grade + ' · ' + t.subjectLabel + '</p></div>' +
+          '</div>' +
+          '<p class="bio">' + t.bio + '</p>' +
+          '<div class="periods">' + periodPills(t.periods) + '</div>' +
+          '<p class="note">' + t.note + '</p>' +
+          '<div class="tutor-meta"><span class="stars">★ ' + t.rating + '</span><span>' + t.stat2 + '</span></div>' +
+          '<div class="tutor-card-actions">' +
+            '<button class="btn btn--ghost-light btn--small" data-view="' + t.id + '">View profile</button>' +
+            '<button class="btn btn--primary btn--small" data-request="' + t.id + '">Request</button>' +
+          '</div>';
+        grid.appendChild(card);
+      });
+  }
+
+  TUTORS.forEach(function(t){
+    var opt = document.createElement('option');
+    opt.value = t.name;
+    opt.textContent = t.name + ' — ' + t.subjectLabel;
+    tutorPrefSelect.appendChild(opt);
+  });
+
+  renderTutors('all');
+
+  document.getElementById('filterRow').addEventListener('click', function(e){
+    var btn = e.target.closest('.tag-chip');
+    if(!btn) return;
+    document.querySelectorAll('.tag-chip').forEach(function(c){
+      c.classList.remove('active');
+      c.style.background = 'var(--paper)';
+      c.style.color = 'var(--ink)';
+    });
+    btn.classList.add('active');
+    if(btn.dataset.filter === 'all'){
+      btn.style.background = 'var(--ink)'; btn.style.color = '#fff';
+    } else {
+      btn.style.background = ACCENTS[btn.dataset.filter]; btn.style.color = '#fff';
+    }
+    renderTutors(btn.dataset.filter);
+  });
+
+  // ---- Modal ----
+  var overlay = document.getElementById('modalOverlay');
+  var modalContent = document.getElementById('modalContent');
+
+  function openModal(tutor){
+    var accent = ACCENTS[tutor.filter];
+    modalContent.innerHTML =
+      '<button class="modal-close" id="modalCloseBtn" aria-label="Close">×</button>' +
+      '<div class="modal-top">' +
+        '<div class="avatar" style="background:' + accent + '">' + tutor.initials + '</div>' +
+        '<div><h3>' + tutor.name + '</h3><p class="subj">' + tutor.grade + ' · ' + tutor.subjectLabel + '</p></div>' +
+      '</div>' +
+      '<p class="note">' + tutor.note + '</p>' +
+      '<p class="bio-full">' + tutor.bio + '</p>' +
+      '<div class="periods">' + periodPills(tutor.periods) + '</div>' +
+      '<div class="modal-stats">' +
+        '<div>Rating<b>★ ' + tutor.rating + '</b></div>' +
+        '<div>Background<b>' + tutor.stat1 + '</b></div>' +
+        '<div>Sessions<b>' + tutor.stat2 + '</b></div>' +
+      '</div>' +
+      '<button class="btn btn--primary" id="modalRequestBtn" style="width:100%;justify-content:center;">Request ' + tutor.name + '</button>';
+    overlay.classList.add('open');
+    document.getElementById('modalCloseBtn').addEventListener('click', closeModal);
+    document.getElementById('modalRequestBtn').addEventListener('click', function(){
+      closeModal();
+      requestTutor(tutor.name);
+    });
+  }
+  function closeModal(){ overlay.classList.remove('open'); }
+  overlay.addEventListener('click', function(e){ if(e.target === overlay) closeModal(); });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeModal(); });
+
+  grid.addEventListener('click', function(e){
+    var viewBtn = e.target.closest('[data-view]');
+    var reqBtn = e.target.closest('[data-request]');
+    if(viewBtn){
+      var t = TUTORS.find(function(x){ return x.id === viewBtn.dataset.view; });
+      if(t) openModal(t);
+    }
+    if(reqBtn){
+      var t2 = TUTORS.find(function(x){ return x.id === reqBtn.dataset.request; });
+      if(t2) requestTutor(t2.name);
+    }
+  });
+
+  function requestTutor(name){
+    tutorPrefSelect.value = name;
+    document.getElementById('signup').scrollIntoView({behavior:'smooth'});
+  }
+
+  // ---- Multi-step form ----
+  var steps = document.querySelectorAll('.step');
+  var segs = document.querySelectorAll('.progress .seg');
+
+  function goToStep(n){
+    steps.forEach(function(s){ s.classList.toggle('active', Number(s.dataset.step) === n); });
+    segs.forEach(function(seg){ seg.classList.toggle('done', Number(seg.dataset.seg) <= n); });
+  }
+
+  document.querySelectorAll('[data-next]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var stepEl = btn.closest('.step');
+      var requiredFields = stepEl.querySelectorAll('input[required], select[required]');
+      var valid = true;
+      requiredFields.forEach(function(f){ if(!f.value){ valid = false; f.style.borderColor = 'var(--coral)'; } });
+      if(!valid) return;
+      goToStep(Number(btn.dataset.next));
+    });
+  });
+  document.querySelectorAll('[data-back]').forEach(function(btn){
+    btn.addEventListener('click', function(){ goToStep(Number(btn.dataset.back)); });
+  });
+
+  document.querySelectorAll('.check-pill input').forEach(function(input){
+    input.addEventListener('change', function(){
+      input.closest('.check-pill').classList.toggle('checked', input.checked);
+    });
+  });
+
+  document.getElementById('signupForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    var permission = document.getElementById('permissionCheck');
+    if(!permission.checked){
+      permission.closest('.permission').style.borderColor = 'var(--coral)';
+      return;
+    }
+    var firstName = document.getElementById('studentName').value.split(' ')[0] || 'there';
+    document.getElementById('confirmName').textContent = "You're on the list, " + firstName + ".";
+    goToStep(4);
+    document.querySelectorAll('.progress .seg').forEach(function(seg){ seg.classList.add('done'); });
+  });
+
+  // ---- FAQ accordion ----
+  document.querySelectorAll('.faq-item').forEach(function(item){
+    var q = item.querySelector('.faq-q');
+    var a = item.querySelector('.faq-a');
+    q.addEventListener('click', function(){
+      var isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(function(other){
+        other.classList.remove('open');
+        other.querySelector('.faq-a').style.maxHeight = null;
+      });
+      if(!isOpen){
+        item.classList.add('open');
+        a.style.maxHeight = a.scrollHeight + 'px';
+      }
+    });
+  });
+
+  // ---- Scroll reveal ----
+  var revealEls = document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          entry.target.classList.add('is-visible');
+          io.unobserve(entry.target);
         }
-
-        themeToggle.addEventListener('click', () => {
-            document.body.classList.toggle('dark-mode');
-            const isDarkMode = document.body.classList.contains('dark-mode');
-            localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
-            themeToggle.innerHTML = isDarkMode 
-                ? '<i class="fas fa-sun"></i>' 
-                : '<i class="fas fa-moon"></i>';
-        });
-
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Animate elements on scroll
-        const observerOptions = {
-            threshold: 0.5,
-            rootMargin: '0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.animation = 'slideInUp 0.6s ease-out forwards';
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.card, .role-card, .step, .stat').forEach(el => {
-            observer.observe(el);
-        });
-    </script>
+      });
+    }, {threshold:0.12});
+    revealEls.forEach(function(el){ io.observe(el); });
+  } else {
+    revealEls.forEach(function(el){ el.classList.add('is-visible'); });
+  }
+})();
+</script>
 
 </body>
 </html>
